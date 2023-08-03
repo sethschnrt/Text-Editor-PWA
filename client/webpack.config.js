@@ -21,10 +21,16 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         template: './index.html',
-        title: 'JATE'
+        title: 'Webpack Plugin'
+      }),
+      new InjectManifest({
+        swSrc: './src-sw.js', 
+        swDest: 'src-sw.js',
       }),
       new WebpackPwaManifest({
         name: 'Text Editor PWA',
+        inject: true,
+        fingerprints: false,
         short_name: 'TextEdit',
         description: 'This is a progressive text editor web application.',
         background_color: '#225ca3',
@@ -37,11 +43,7 @@ module.exports = () => {
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons'),
           },
-        ],
-      }),
-      new InjectManifest({
-        swSrc: './src-sw.js', 
-        swDest: 'src-sw.js',
+        ], 
       }),
     ],
 
